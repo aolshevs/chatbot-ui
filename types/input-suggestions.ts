@@ -1,4 +1,4 @@
-export interface InputSuggestions {
+export interface InputSuggestion {
   suggestion: string
   relevance: number
   highlights: Highlight[]

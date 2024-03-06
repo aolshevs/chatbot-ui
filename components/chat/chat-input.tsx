@@ -17,7 +17,7 @@ import { ChatFilesDisplay } from "./chat-files-display"
 import { useChatHandler } from "./chat-hooks/use-chat-handler"
 import { usePromptAndCommand } from "./chat-hooks/use-prompt-and-command"
 import { useSelectFileHandler } from "./chat-hooks/use-select-file-handler"
-import { InputSuggestions } from "@/types/input-suggestions"
+import { InputSuggestion } from "@/types/input-suggestions"
 
 interface ChatInputProps {}
 
@@ -71,8 +71,12 @@ export const ChatInput: FC<ChatInputProps> = ({}) => {
       }
     })
     const json = await response.json()
+    const filteredSuggestions = json
+      .filter((suggestion: InputSuggestion) => suggestion.highlights.length)
+      .slice(0, 5)
+      .reverse()
     setIsInputSuggestionsOpen(true)
-    setInputSuggestions(json)
+    setInputSuggestions(filteredSuggestions)
     console.log(`autocomplete: ${JSON.stringify(json)}`)
   }
 

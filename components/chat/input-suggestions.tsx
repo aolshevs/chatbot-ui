@@ -10,11 +10,9 @@ export const InputSuggestions: FC<InputSuggestionProps> = ({}) => {
     inputSuggestions
   } = useContext(ChatbotUIContext)
 
-  console.log({ isInputSuggestionsOpen })
-
   return (
     <>
-      {isInputSuggestionsOpen && inputSuggestions.length && (
+      {isInputSuggestionsOpen && inputSuggestions.length > 0 && (
         <div className="bg-background flex flex-col space-y-1 rounded-xl border-2 p-2 text-sm">
           {inputSuggestions.map((suggestion, index) => (
             <div

@@ -9,7 +9,7 @@ import {
   WorkspaceImage
 } from "@/types"
 import { AssistantImage } from "@/types/images/assistant-image"
-import { InputSuggestions } from "@/types/input-suggestions"
+import { InputSuggestion } from "@/types/input-suggestions"
 import { VALID_ENV_KEYS } from "@/types/valid-keys"
 import { Dispatch, SetStateAction, createContext } from "react"
 
@@ -109,8 +109,8 @@ interface ChatbotUIContext {
   setFocusTool: Dispatch<SetStateAction<boolean>>
   isInputSuggestionsOpen: boolean
   setIsInputSuggestionsOpen: Dispatch<SetStateAction<boolean>>
-  inputSuggestions: InputSuggestions[]
-  setInputSuggestions: Dispatch<SetStateAction<InputSuggestions[]>>
+  inputSuggestions: InputSuggestion[]
+  setInputSuggestions: Dispatch<SetStateAction<InputSuggestion[]>>
 
   // ATTACHMENTS STORE
   chatFiles: ChatFile[]

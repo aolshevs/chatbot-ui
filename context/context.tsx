@@ -9,6 +9,7 @@ import {
   WorkspaceImage
 } from "@/types"
 import { AssistantImage } from "@/types/images/assistant-image"
+import { InputSuggestions } from "@/types/input-suggestions"
 import { VALID_ENV_KEYS } from "@/types/valid-keys"
 import { Dispatch, SetStateAction, createContext } from "react"
 
@@ -106,6 +107,10 @@ interface ChatbotUIContext {
   setFocusFile: Dispatch<SetStateAction<boolean>>
   focusTool: boolean
   setFocusTool: Dispatch<SetStateAction<boolean>>
+  isInputSuggestionsOpen: boolean
+  setIsInputSuggestionsOpen: Dispatch<SetStateAction<boolean>>
+  inputSuggestions: InputSuggestions[]
+  setInputSuggestions: Dispatch<SetStateAction<InputSuggestions[]>>
 
   // ATTACHMENTS STORE
   chatFiles: ChatFile[]
@@ -226,6 +231,10 @@ export const ChatbotUIContext = createContext<ChatbotUIContext>({
   setFocusFile: () => {},
   focusTool: false,
   setFocusTool: () => {},
+  isInputSuggestionsOpen: false,
+  setIsInputSuggestionsOpen: () => {},
+  inputSuggestions: [],
+  setInputSuggestions: () => {},
 
   // ATTACHMENTS STORE
   chatFiles: [],

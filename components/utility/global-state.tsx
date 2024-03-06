@@ -24,6 +24,7 @@ import {
   WorkspaceImage
 } from "@/types"
 import { AssistantImage } from "@/types/images/assistant-image"
+import { InputSuggestions } from "@/types/input-suggestions"
 import { VALID_ENV_KEYS } from "@/types/valid-keys"
 import { useRouter } from "next/navigation"
 import { FC, useEffect, useState } from "react"
@@ -104,6 +105,10 @@ export const GlobalState: FC<GlobalStateProps> = ({ children }) => {
   const [focusPrompt, setFocusPrompt] = useState(false)
   const [focusFile, setFocusFile] = useState(false)
   const [focusTool, setFocusTool] = useState(false)
+  const [isInputSuggestionsOpen, setIsInputSuggestionsOpen] = useState(false)
+  const [inputSuggestions, setInputSuggestions] = useState<InputSuggestions[]>(
+    []
+  )
 
   // ATTACHMENTS STORE
   const [chatFiles, setChatFiles] = useState<ChatFile[]>([])
@@ -290,6 +295,10 @@ export const GlobalState: FC<GlobalStateProps> = ({ children }) => {
         setFocusFile,
         focusTool,
         setFocusTool,
+        isInputSuggestionsOpen,
+        setIsInputSuggestionsOpen,
+        inputSuggestions,
+        setInputSuggestions,
 
         // ATTACHMENT STORE
         chatFiles,

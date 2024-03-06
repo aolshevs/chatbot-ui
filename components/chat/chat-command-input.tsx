@@ -4,6 +4,7 @@ import { usePromptAndCommand } from "./chat-hooks/use-prompt-and-command"
 import { FilePicker } from "./file-picker"
 import { PromptPicker } from "./prompt-picker"
 import { ToolPicker } from "./tool-picker"
+import { InputSuggestions } from "./input-suggestions"
 
 interface ChatCommandInputProps {}
 
@@ -24,6 +25,8 @@ export const ChatCommandInput: FC<ChatCommandInputProps> = ({}) => {
 
   return (
     <>
+      <InputSuggestions />
+
       <PromptPicker />
 
       <FilePicker

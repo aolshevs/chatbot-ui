@@ -7,8 +7,14 @@ export const InputSuggestions: FC<InputSuggestionProps> = ({}) => {
   const {
     isInputSuggestionsOpen,
     setIsInputSuggestionsOpen,
-    inputSuggestions
+    inputSuggestions,
+    setUserInput
   } = useContext(ChatbotUIContext)
+
+  const onSuggestionClick = (suggestion: string) => {
+    setUserInput(suggestion)
+    setIsInputSuggestionsOpen(false)
+  }
 
   return (
     <>
@@ -18,6 +24,7 @@ export const InputSuggestions: FC<InputSuggestionProps> = ({}) => {
             <div
               key={index}
               className="text-md flex h-14 cursor-pointer items-center italic hover:opacity-50"
+              onClick={() => onSuggestionClick(suggestion.suggestion)}
             >
               {suggestion.suggestion}
             </div>

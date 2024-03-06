@@ -71,9 +71,11 @@ export const ChatInput: FC<ChatInputProps> = ({}) => {
       }
     })
     const json = await response.json()
+    const numberShownSuggestions = 5
+    // filter out relevant suggestions, take first ~n~ of them. Array is reversed so the most relevant suggestions are closer to the input field.
     const filteredSuggestions = json
       .filter((suggestion: InputSuggestion) => suggestion.highlights.length)
-      .slice(0, 5)
+      .slice(0, numberShownSuggestions)
       .reverse()
     setIsInputSuggestionsOpen(true)
     setInputSuggestions(filteredSuggestions)
@@ -89,6 +91,12 @@ export const ChatInput: FC<ChatInputProps> = ({}) => {
       handleFocusChatInput()
     }, 200) // FIX: hacky
   }, [selectedPreset, selectedAssistant])
+
+  useEffect(() => {
+    if (userInput) {
+      handleFocusChatInput()
+    }
+  }, [userInput, handleFocusChatInput])
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
     if (!isTyping && event.key === "Enter" && !event.shiftKey) {

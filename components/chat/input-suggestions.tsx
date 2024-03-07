@@ -12,6 +12,8 @@ export const InputSuggestions: FC<InputSuggestionProps> = ({}) => {
     setUserInput
   } = useContext(ChatbotUIContext)
 
+  console.log({ inputSuggestions })
+
   const onSuggestionClick = (suggestion: string) => {
     setUserInput(suggestion)
     setIsInputSuggestionsOpen(false)
@@ -42,11 +44,11 @@ export const InputSuggestions: FC<InputSuggestionProps> = ({}) => {
   return (
     <>
       {isInputSuggestionsOpen && inputSuggestions.length > 0 && (
-        <div className="bg-background rounded-xl border-2 p-2 text-sm">
+        <div className="bg-background rounded-xl border-2 p-4 text-sm">
           {inputSuggestions.map((suggestion, index) => (
             <div
               key={index}
-              className="text-md wrap h-14 cursor-pointer hover:opacity-50"
+              className="text-md mb-4 cursor-pointer hover:opacity-50"
               onClick={() => onSuggestionClick(suggestion.suggestion)}
             >
               {highlightMatchedWords(suggestion)}

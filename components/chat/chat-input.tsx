@@ -92,6 +92,7 @@ export const ChatInput: FC<ChatInputProps> = ({}) => {
     }, 200) // FIX: hacky
   }, [selectedPreset, selectedAssistant])
 
+  // when autocomplete suggestion is selected, focus on the input element
   useEffect(() => {
     if (userInput) {
       handleFocusChatInput()

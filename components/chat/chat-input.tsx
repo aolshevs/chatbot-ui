@@ -63,23 +63,30 @@ export const ChatInput: FC<ChatInputProps> = ({}) => {
   const { handleInputChange } = usePromptAndCommand()
 
   const handleAutocomplete = async (value: string) => {
+    const query = value === "@" ? "" : value
+
     const response = await fetch("/api/autocomplete", {
-      body: JSON.stringify({ query: value }),
+      body: JSON.stringify({ query: query }),
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       }
     })
     const json = await response.json()
-    const numberShownSuggestions = 5
+
+    if (value === "@") {
+      setInputSuggestions(json)
+    } else {
+      const numberShownSuggestions = 5
+      const filteredSuggestions = json
+        .filter((suggestion: InputSuggestion) => suggestion.highlights.length)
+        .slice(0, numberShownSuggestions)
+        .reverse()
+      setInputSuggestions(filteredSuggestions)
+    }
     // filter out relevant suggestions, take first ~n~ of them. Array is reversed so the most relevant suggestions are closer to the input field.
-    const filteredSuggestions = json
-      .filter((suggestion: InputSuggestion) => suggestion.highlights.length)
-      .slice(0, numberShownSuggestions)
-      .reverse()
+
     setIsInputSuggestionsOpen(true)
-    setInputSuggestions(filteredSuggestions)
-    console.log(`autocomplete: ${JSON.stringify(json)}`)
   }
 
   const { filesToAccept, handleSelectDeviceFile } = useSelectFileHandler()
@@ -209,7 +216,7 @@ export const ChatInput: FC<ChatInputProps> = ({}) => {
           textareaRef={chatInputRef}
           className="ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring text-md flex w-full resize-none rounded-md border-none bg-transparent px-14 py-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
           placeholder={t(
-            `Ask anything. Type "/" for prompts, "#" for files, and "!" for tools.`
+            `Ask anything. Type "/" for prompts, "#" for files, "!" for tools, and "@" for questions suggestions`
           )}
           onValueChange={value => {
             handleInputChange(value)

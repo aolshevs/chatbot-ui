@@ -17,16 +17,19 @@ export const usePromptAndCommand = () => {
     setUseRetrieval,
     setToolCommand,
     setIsToolPickerOpen,
-    setSelectedTools
+    setSelectedTools,
+    setIsInputSuggestionsOpen
   } = useContext(ChatbotUIContext)
 
   const handleInputChange = (value: string) => {
     const slashTextRegex = /\/([^ ]*)$/
     const atTextRegex = /#([^ ]*)$/
     const toolTextRegex = /!([^ ]*)$/
+    const questionsTextRegex = /@([^ ]*)$/
     const slashMatch = value.match(slashTextRegex)
     const atMatch = value.match(atTextRegex)
     const toolMatch = value.match(toolTextRegex)
+    const questionsMatch = value.match(questionsTextRegex)
 
     if (slashMatch) {
       setIsPromptPickerOpen(true)
@@ -37,6 +40,8 @@ export const usePromptAndCommand = () => {
     } else if (toolMatch) {
       setIsToolPickerOpen(true)
       setToolCommand(toolMatch[1])
+    } else if (questionsMatch) {
+      setIsInputSuggestionsOpen(true)
     } else {
       setIsPromptPickerOpen(false)
       setIsAtPickerOpen(false)
